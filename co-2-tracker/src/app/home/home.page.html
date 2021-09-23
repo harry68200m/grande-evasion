@@ -1,17 +1,38 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      C02 Tracker
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-item>
+    <ion-card (click)="filmDetail(2)">
+      <img style="width: 400px; height: 300px; object-fit: cover;" src="../../assets/amphiA.jpg" />
+      <ion-item>
+        <ion-label style="text-align: center;">Amphi A</ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-item>
+
+  <ion-item>
+    <ion-card (click)="filmDetail(3)">
+      <img style="width: 400px; height: 300px; object-fit: cover;" src="../../assets/amphiP.jpg" />
+      <ion-item>
+        <ion-label style="text-align: center;">Amphi P</ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-item>
+
+  <ion-item>
+    <ion-card (click)="filmDetail(1)">
+      <img style="width: 400px; height: 300px; object-fit: cover;" src="../../assets/masterRoom.jpg" />
+      <ion-item>
+        <ion-label style="text-align: center;">Salle UHA 4.0</ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-item>
+
 </ion-content>

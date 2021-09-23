@@ -1,5 +1,7 @@
 {
   "name": "CO2 Tracker",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
