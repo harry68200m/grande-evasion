@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { GetApiService } from 'src/services/get-api.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,26 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(private router: Router) {}
+  tableRooms: Array<any> = [];
 
-  filmDetail(id){
+  constructor(private router: Router, private getAPI: GetApiService) {}
+
+  ngOnInit() {
+    this.getRooms()
+  }
+
+  getRooms() {
+    this.getAPI.rooms().then((rooms: any) => {
+     this.tableRooms = rooms.datas;
+     console.log(this.tableRooms)
+   });
+
+ }
+
+  roomDetail(id){
     this.router.navigate(['room', id]);
   }
+
+  
 
 }

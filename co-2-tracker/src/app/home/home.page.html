@@ -8,29 +8,11 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-item>
-    <ion-card (click)="filmDetail(2)">
-      <img style="width: 400px; height: 300px; object-fit: cover;" src="../../assets/amphiA.jpg" />
+  <ion-item *ngFor="let room of tableRooms; let i = index">
+    <ion-card (click)="roomDetail(2)">
+      <img style="width: 400px; height: 300px; object-fit: cover;" [src]="room.url_img" />
       <ion-item>
-        <ion-label style="text-align: center;">Amphi A</ion-label>
-      </ion-item>
-    </ion-card>
-  </ion-item>
-
-  <ion-item>
-    <ion-card (click)="filmDetail(3)">
-      <img style="width: 400px; height: 300px; object-fit: cover;" src="../../assets/amphiP.jpg" />
-      <ion-item>
-        <ion-label style="text-align: center;">Amphi P</ion-label>
-      </ion-item>
-    </ion-card>
-  </ion-item>
-
-  <ion-item>
-    <ion-card (click)="filmDetail(1)">
-      <img style="width: 400px; height: 300px; object-fit: cover;" src="../../assets/masterRoom.jpg" />
-      <ion-item>
-        <ion-label style="text-align: center;">Salle UHA 4.0</ion-label>
+        <ion-label style="text-align: center;">{{ room.name }}</ion-label>
       </ion-item>
     </ion-card>
   </ion-item>
