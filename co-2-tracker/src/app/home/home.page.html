@@ -8,10 +8,10 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-item *ngFor="let room of tableRooms; let i = index">
+  <ion-item lines="full" *ngFor="let room of tableRooms; let i = index">
     <ion-card (click)="roomDetail(2)">
       <img style="width: 400px; height: 300px; object-fit: cover;" [src]="room.url_img" />
-      <ion-item>
+      <ion-item lines="none">
         <ion-label style="text-align: center;">{{ room.name }}</ion-label>
       </ion-item>
     </ion-card>

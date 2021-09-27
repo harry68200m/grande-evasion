@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar style="--background: var(--color-header)">
+    <ion-title> Historique </ion-title>
+    <ion-buttons slot="start">
+      <ion-button
+        class="goBack"
+        (click)="this.navParams.data.homeref.dismissModal()"
+      >
+        <ion-icon color="white" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid style="text-align: center">
+    <ion-item  lines="full" class="mesureItm">
+      <ion-row>
+        <ion-col>
+          <ion-label style="margin-top: 25%">
+            <h3>28/09/2021 - 13:43</h3>
+          </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-chip color="success">
+            <ion-icon name="speedometer-outline"></ion-icon>
+            <ion-label style="font-size: small">646 ppm</ion-label>
+          </ion-chip>
+          <ion-chip color="secondary">
+            <ion-icon name="people-outline"></ion-icon>
+            <ion-label style="font-size: small">12</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-row>
+        <ion-col>
+          <ion-label style="margin-top: 25%">
+            <h3>28/09/2021 - 13:43</h3>
+          </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-chip color="danger">
+            <ion-icon name="speedometer-outline"></ion-icon>
+            <ion-label style="font-size: small">1234 ppm</ion-label>
+          </ion-chip>
+          <ion-chip color="secondary">
+            <ion-icon name="people-outline"></ion-icon>
+            <ion-label style="font-size: small">5</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-row>
+        <ion-col>
+          <ion-label style="margin-top: 25%">
+            <h3>28/09/2021 - 13:43</h3>
+          </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-chip color="warning">
+            <ion-icon name="speedometer-outline"></ion-icon>
+            <ion-label style="font-size: small">892 ppm</ion-label>
+          </ion-chip>
+          <ion-chip color="secondary">
+            <ion-icon name="people-outline"></ion-icon>
+            <ion-label style="font-size: small">8</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-grid>
+</ion-content>

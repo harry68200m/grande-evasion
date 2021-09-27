@@ -29,17 +29,19 @@
     </div>
 
     <hr />
-    <ion-button expand="block" color="warning">Activer les alertes</ion-button>
+    <ion-button style="margin: 6%" expand="block" color="warning">Activer les alertes</ion-button>
 
     <div class="rate" style="margin: 6%">
-      <div>Dernier taux de C02 relevé :</div>
+      <div class="date">Derniers relevés :</div>
       <div style="text-align: center">
-        <ion-chip class="chipRate">
+        <ion-chip color="success" style="font-size: small" class="chipRate">
+          <ion-icon name="speedometer-outline"></ion-icon>
           <ion-label style="font-size: small">
             646 ppm : 23/09/2021 - 08:39
           </ion-label>
         </ion-chip>
-        <ion-chip class="chipPeopleCount">
+        <ion-chip color="primary" style="font-size: small" class="chipPeopleCount">
+          <ion-icon name="speedometer-outline"></ion-icon>
           <ion-label style="font-size: small"> 12 personnes </ion-label>
         </ion-chip>
       </div>
@@ -48,6 +50,33 @@
         style="width: 400px; height: 300px; object-fit: cover"
         src="../../assets/graph.png"
       />
+      <ion-button expand="block" color="primary" (click)="presentModal()">Historique des mesures</ion-button>
+    </div>
+    <hr>
+    <div class="devices">
+      <div class="date">Matériel de la salle : </div>
+      <ion-grid style="text-align: center;">
+        <ion-row>
+          <ion-col>
+            <div>Capteurs</div>
+            <ion-chip color="secondary">
+              <ion-icon name="speedometer-outline"></ion-icon>
+              <ion-label style="font-size: small">Capteur 1</ion-label>
+            </ion-chip>
+          </ion-col>
+          <ion-col>
+            <div>Caméras</div>
+            <ion-chip color="secondary">
+              <ion-icon name="videocam"></ion-icon>
+              <ion-label style="font-size: small">Caméra 1</ion-label>
+            </ion-chip>
+            <ion-chip color="secondary">
+              <ion-icon name="videocam"></ion-icon>
+              <ion-label style="font-size: small">Caméra 5</ion-label>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </div>
 </ion-content>
