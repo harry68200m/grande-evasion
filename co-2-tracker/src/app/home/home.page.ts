@@ -20,7 +20,6 @@ export class HomePage {
   getRooms() {
     this.getAPI.rooms().then((response: any) => {
      this.tableRooms = response.datas.rooms;
-     console.log(this.tableRooms)
    });
 
  }

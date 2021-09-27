@@ -1,27 +1,27 @@
-<ion-header>
+<ion-header *ngIf="roomData">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Amphi A</ion-title>
+    <ion-title>{{roomData.room.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <div class="backdrop">
-    <img src="../../assets/amphiA.jpg" />
+<ion-content padding >
+  <div class="backdrop" *ngIf="roomData">
+    <img [src]="roomData.room.url_img" />
   </div>
   <div class="backdrop-separator1"></div>
   <div class="backdrop-separator2"></div>
 
-  <div class="poster">
-    <img class="poster" src="../../assets/amphiA.jpg" />
-    <img class="poster-effect" src="../../assets/amphiA.jpg" />
+  <div class="poster"  *ngIf="roomData">
+    <img class="poster" [src]="roomData.room.url_img" />
+    <img class="poster-effect" [src]="roomData.room.url_img" />
   </div>
 
   <div class="room-data">
-    <div class="name">Amphithéâtre A</div>
-    <div class="date">23/09/2021</div>
+    <div class="name" *ngIf="roomData">{{roomData.room.name}}</div>
+    <div class="date" *ngIf="roomData">{{date | date: 'dd/MM/YYYY':'GMT'}}</div>
     <div style="text-align: center;">
       <ion-chip class="alertStatus" color="danger">
         <ion-label style="font-size: small"> Alertes désactivées </ion-label>
@@ -33,29 +33,28 @@
 
     <div class="rate" style="margin: 6%">
       <div class="date">Derniers relevés :</div>
-      <div style="text-align: center">
-        <ion-chip color="success" style="font-size: small" class="chipRate">
+      <div style="text-align: center" *ngIf="roomData">
+        <ion-chip color="success" style="font-size: small" class="chipRate" *ngIf="roomData.room.sensors[0]" >
           <ion-icon name="speedometer-outline"></ion-icon>
           <ion-label style="font-size: small">
-            646 ppm : 23/09/2021 - 08:39
+            {{roomData.room.sensors[0].values[0].value}} ppm : {{roomData.room.sensors[0].values[0].timestamp*1000 | date: 'dd/MM/YYYY':'GMT+2'}} - {{roomData.room.sensors[0].values[0].timestamp*1000 | date: 'H:mm':'GMT+2'}}
           </ion-label>
         </ion-chip>
-        <ion-chip color="primary" style="font-size: small" class="chipPeopleCount">
+        <ion-chip color="primary" style="font-size: small" class="chipPeopleCount" *ngIf="roomData.room.webcams[0]">
           <ion-icon name="speedometer-outline"></ion-icon>
-          <ion-label style="font-size: small"> 12 personnes </ion-label>
+          <ion-label style="font-size: small"> {{roomData.room.webcams[0].values[0].value}} personnes </ion-label>
         </ion-chip>
       </div>
       <br />
-      <img
-        style="width: 400px; height: 300px; object-fit: cover"
-        src="../../assets/graph.png"
-      />
+        <div>
+          <canvas #myCanvas width="300" height="300"></canvas>
+        </div>
       <ion-button expand="block" color="primary" (click)="presentModal()">Historique des mesures</ion-button>
     </div>
     <hr>
     <div class="devices">
       <div class="date">Matériel de la salle : </div>
-      <ion-grid style="text-align: center;">
+      <ion-grid style="text-align: center;" *ngIf="roomData">
         <ion-row>
           <ion-col>
             <div>Capteurs</div>
