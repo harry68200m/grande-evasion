@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class GetApiService {
 
-  ipAPI = 'http://192.168.2.7:3000'
+  ipAPI = 'http://localhost:3000'
 
 
   constructor(private http: HttpClient) { }
