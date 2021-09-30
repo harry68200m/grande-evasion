@@ -37,7 +37,7 @@
         <ion-chip color="success" style="font-size: small" class="chipRate" *ngIf="roomData.last_value_co2">
           <ion-icon name="speedometer-outline"></ion-icon>
           <ion-label style="font-size: small">
-            {{roomData.last_value_co2}} ppm : 29/09/21 - 14:34 <!-- {{roomData.room.sensors[0].values[0].timestamp*1000 | date: 'dd/MM/YYYY':'GMT+2'}} - {{roomData.room.sensors[0].values[0].timestamp*1000 | date: 'H:mm':'GMT+2'}} -->
+            {{roomData.last_value_co2}} ppm : {{roomData.timestamp*1000 | date: 'dd/MM/YYYY':'GMT+2'}} - {{roomData.timestamp*1000 | date: 'H:mm':'GMT+2'}}
           </ion-label>
         </ion-chip>
         <ion-chip color="primary" style="font-size: small" class="chipPeopleCount" *ngIf="roomData.last_value_webcam">
@@ -60,14 +60,14 @@
             <div>Capteurs</div>
             <ion-chip color="secondary" *ngFor="let sensor of roomData.room.sensors; let i = index">
               <ion-icon name="videocam"></ion-icon>
-              <ion-label style="font-size: small">{{sensor.ip}}</ion-label>
+              <ion-label style="font-size: small">{{sensor.name}}</ion-label>
             </ion-chip>
           </ion-col>
           <ion-col>
             <div>Caméras</div>
             <ion-chip color="secondary" *ngFor="let webcam of roomData.room.webcams; let i = index">
               <ion-icon name="videocam"></ion-icon>
-              <ion-label style="font-size: small">{{webcam.ip}}</ion-label>
+              <ion-label style="font-size: small">{{webcam.name}}</ion-label>
             </ion-chip>
           </ion-col>
         </ion-row>
