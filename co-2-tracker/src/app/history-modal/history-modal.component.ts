@@ -8,7 +8,7 @@ import { NavParams } from '@ionic/angular';
 })
 export class HistoryModalComponent implements OnInit {
 
-  constructor(private navParams : NavParams) { }
+  constructor(public navParams : NavParams) { }
 
   ngOnInit() {
   }

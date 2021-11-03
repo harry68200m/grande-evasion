@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -7,8 +8,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class GetApiService {
 
-  ipAPI = 'http://localhost:3000'
-
+  ipAPI = environment.API_URL;
 
   constructor(private http: HttpClient) { }
 
@@ -35,7 +35,7 @@ export class GetApiService {
   async room(id) {
     return new Promise((resolve, reject) => {
       this.http
-        .get<any>(this.ipAPI + "/stats/getDataFromRoom/?id_room=" + id, {
+        .get<any>(this.ipAPI + "/room/getRoomDetailsWithDatas/" + id, {
           headers: {
             "Content-Type": "application/json"
           },

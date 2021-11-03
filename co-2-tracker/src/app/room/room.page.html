@@ -3,72 +3,84 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{roomData.room.name}}</ion-title>
+    <ion-title>{{roomData.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding >
+<ion-content padding>
   <div class="backdrop" *ngIf="roomData">
-    <img [src]="roomData.room.url_img" />
+    <img [src]="roomData.url_img" />
   </div>
   <div class="backdrop-separator1"></div>
   <div class="backdrop-separator2"></div>
 
-  <div class="poster"  *ngIf="roomData">
-    <img class="poster" [src]="roomData.room.url_img" />
-    <img class="poster-effect" [src]="roomData.room.url_img" />
+  <div class="poster" *ngIf="roomData">
+    <img class="poster" [src]="roomData.url_img" />
+    <img class="poster-effect" [src]="roomData.url_img" />
   </div>
 
   <div class="room-data">
-    <div class="name" *ngIf="roomData">{{roomData.room.name}}</div>
+    <div class="name" *ngIf="roomData">{{roomData.name}}</div>
     <div class="date" *ngIf="roomData">{{date | date: 'dd/MM/YYYY':'GMT'}}</div>
-    <div style="text-align: center;">
+    <div style="text-align: center">
       <ion-chip class="alertStatus" color="danger">
         <ion-label style="font-size: small"> Alertes désactivées </ion-label>
       </ion-chip>
     </div>
 
     <hr />
-    <ion-button style="margin: 6%" expand="block" color="warning">Activer les alertes</ion-button>
+    <ion-button style="margin: 6%" expand="block" color="warning"
+      >Activer les alertes</ion-button
+    >
 
     <div class="rate" style="margin: 6%">
       <div class="date">Derniers relevés :</div>
       <div style="text-align: center" *ngIf="roomData">
-        <ion-chip color="success" style="font-size: small" class="chipRate" *ngIf="roomData.last_value_co2">
+        <ion-chip color="success" style="font-size: small" class="chipRate">
           <ion-icon name="speedometer-outline"></ion-icon>
           <ion-label style="font-size: small">
-            {{roomData.last_value_co2}} ppm : {{roomData.timestamp*1000 | date: 'dd/MM/YYYY':'GMT+2'}} - {{roomData.timestamp*1000 | date: 'H:mm':'GMT+2'}}
+            823 ppm : 02/11/21 - 11h12
           </ion-label>
         </ion-chip>
-        <ion-chip color="primary" style="font-size: small" class="chipPeopleCount" *ngIf="roomData.last_value_webcam">
+        <ion-chip
+          color="primary"
+          style="font-size: small"
+          class="chipPeopleCount"
+        >
           <ion-icon name="speedometer-outline"></ion-icon>
-          <ion-label style="font-size: small"> {{roomData.last_value_webcam}} personnes </ion-label>
+          <ion-label style="font-size: small"> 3 personnes </ion-label>
         </ion-chip>
       </div>
       <br />
-        <div>
-          <canvas #myCanvas width="300" height="300"></canvas>
-        </div>
-      <ion-button expand="block" color="primary" (click)="presentModal()">Historique des mesures</ion-button>
+      <div>
+        <canvas #myCanvas width="300" height="300"></canvas>
+      </div>
+      <ion-button expand="block" color="primary" (click)="presentModal()"
+        >Historique des mesures</ion-button
+      >
     </div>
-    <hr>
+    <hr />
     <div class="devices">
-      <div class="date">Matériel de la salle : </div>
-      <ion-grid style="text-align: center;" *ngIf="roomData">
+      <div class="date">Matériel de la salle :</div>
+      <ion-grid style="text-align: center" *ngIf="roomData">
         <ion-row>
           <ion-col>
             <div>Capteurs</div>
-            <ion-chip color="secondary" *ngFor="let sensor of roomData.room.sensors; let i = index">
-              <ion-icon name="videocam"></ion-icon>
-              <ion-label style="font-size: small">{{sensor.name}}</ion-label>
-            </ion-chip>
+            <div *ngFor="let sensor of roomData.sensors; let i = index">
+              <ion-chip color="secondary" *ngIf=" sensor.type == 'CO2'">
+                <ion-icon name="videocam"></ion-icon>
+                <ion-label style="font-size: small">{{sensor.name}}</ion-label>
+              </ion-chip>
+            </div>
           </ion-col>
           <ion-col>
             <div>Caméras</div>
-            <ion-chip color="secondary" *ngFor="let webcam of roomData.room.webcams; let i = index">
-              <ion-icon name="videocam"></ion-icon>
-              <ion-label style="font-size: small">{{webcam.name}}</ion-label>
-            </ion-chip>
+            <div *ngFor="let sensor of roomData.sensors; let i = index">
+              <ion-chip color="secondary" *ngIf=" sensor.type == 'Webcam'">
+                <ion-icon name="videocam"></ion-icon>
+                <ion-label style="font-size: small">{{sensor.name}}</ion-label>
+              </ion-chip>
+            </div>
           </ion-col>
         </ion-row>
       </ion-grid>

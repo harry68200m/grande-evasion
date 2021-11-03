@@ -60,7 +60,7 @@ export class RoomPage {
     console.log(this.roomID)
     this.getAPI.room(this.roomID).then((response: any) => {
     this.roomData = response.datas;
-    console.log(this.roomData.room._id)
+    console.log(this.roomData)
    });
   }
 

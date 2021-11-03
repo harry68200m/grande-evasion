@@ -8,10 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GetApiService } from '../services/get-api.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HistoryModalComponent } from './history-modal/history-modal.component';
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HistoryModalComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [GetApiService, HttpClient, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
