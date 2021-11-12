@@ -21,7 +21,7 @@
 
   <div class="room-data">
     <div class="name" *ngIf="roomData">{{roomData.name}}</div>
-    <div class="date" *ngIf="roomData">{{date | date: 'dd/MM/YYYY':'GMT'}}</div>
+    <div class="date" *ngIf="roomData">{{date | date: 'dd/MM/YYYY':'GMT+1'}}</div>
     <div style="text-align: center">
       <ion-chip class="alertStatus" color="danger">
         <ion-label style="font-size: small"> Alertes désactivées </ion-label>
@@ -36,19 +36,22 @@
     <div class="rate" style="margin: 6%">
       <div class="date">Derniers relevés :</div>
       <div style="text-align: center" *ngIf="roomData">
-        <ion-chip color="success" style="font-size: small" class="chipRate">
+        <ion-chip color="success" style="font-size: small" class="chipRate" *ngIf="getLastValue('CO2')">
           <ion-icon name="speedometer-outline"></ion-icon>
           <ion-label style="font-size: small">
-            823 ppm : 02/11/21 - 11h12
+            {{getLastValue('CO2')}} ppm
           </ion-label>
         </ion-chip>
         <ion-chip
           color="primary"
           style="font-size: small"
           class="chipPeopleCount"
+          *ngIf="getLastValue('Webcam')"
         >
           <ion-icon name="speedometer-outline"></ion-icon>
-          <ion-label style="font-size: small"> 3 personnes </ion-label>
+          <ion-label style="font-size: small">
+            {{getLastValue('Webcam')}} personnes
+          </ion-label>
         </ion-chip>
       </div>
       <br />

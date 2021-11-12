@@ -33,22 +33,16 @@ export class RoomPage {
     await this.getRoomData();
   }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
+  async getRoomData() {
+    console.log(this.roomID);
+    await this.getAPI.room(this.roomID).then((response: any) => {
+      this.roomData = response.datas;
       this.context = (<HTMLCanvasElement>(
         this.myCanvas.nativeElement
       )).getContext('2d');
       this.chart = new Chart(<HTMLCanvasElement>this.myCanvas.nativeElement, this.chartDatas());
-
-      console.log(this.chart);
-    }, 400);
-  }
-
-  getRoomData() {
-    console.log(this.roomID);
-    this.getAPI.room(this.roomID).then((response: any) => {
-      this.roomData = response.datas;
     });
+    console.log(this.roomData)
   }
 
   chartDatas() : any {
@@ -100,20 +94,31 @@ export class RoomPage {
       });
     });
 
-    chartData.data.labels = timestamps.map(t =>  new Date(t*1000).toLocaleDateString() + ' ' + new Date(t*1000).toLocaleTimeString());
+    chartData.data.labels = timestamps.map(t =>  new Date(t*1000).toLocaleDateString('fr-FR') + ' ' + new Date(t*1000).toLocaleTimeString('fr-FR'));
 
     return chartData;
   }
 
+  getLastValue(type){
+    var lastValue = null;
+    if(this.roomData){
+      this.roomData.sensors.forEach(sensor => {
+        if (sensor.type == type) {
+          lastValue = sensor.values[0]?.value;
+        }      
+      });
+    }   
+    return lastValue
+  }
 
-    getRandomColor(){
+  getRandomColor(){
       return 'rgba(' + Math.floor(Math.random() * 255) + ','  + Math.floor(Math.random() * 255) + ','  + Math.floor(Math.random() * 255) + ',1)';
-    }  
+  }  
 
   async presentModal() {
     const modal = await this.modalController.create({
       component: HistoryModalComponent,
-      componentProps: { homeref: this, roomID: this.roomID },
+      componentProps: { homeref: this, roomData: this.roomData },
       swipeToClose: true,
     });
     this.currentModal = modal;
