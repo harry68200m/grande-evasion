@@ -118,7 +118,7 @@ export class RoomPage {
   async presentModal() {
     const modal = await this.modalController.create({
       component: HistoryModalComponent,
-      componentProps: { homeref: this, roomID: this.roomID },
+      componentProps: { homeref: this, roomData: this.roomData },
       swipeToClose: true,
     });
     this.currentModal = modal;

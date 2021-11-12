@@ -21,7 +21,7 @@
 
   <div class="room-data">
     <div class="name" *ngIf="roomData">{{roomData.name}}</div>
-    <div class="date" *ngIf="roomData">{{date | date: 'dd/MM/YYYY':'GMT'}}</div>
+    <div class="date" *ngIf="roomData">{{date | date: 'dd/MM/YYYY':'GMT+1'}}</div>
     <div style="text-align: center">
       <ion-chip class="alertStatus" color="danger">
         <ion-label style="font-size: small"> Alertes désactivées </ion-label>
