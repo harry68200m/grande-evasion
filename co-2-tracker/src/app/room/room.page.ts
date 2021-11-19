@@ -182,9 +182,12 @@ export class RoomPage {
     if(type == 'CO2' && this.chartData[this.chartData.length - 1]){
       lastValue = this.chartData[this.chartData.length - 1].co2
     } 
-    else if (type == 'CO2' && this.chartData[this.chartData.length - 1]){
+    else if (type == 'webcam' && this.chartData[this.chartData.length - 1]){
       lastValue = this.chartData[this.chartData.length - 1].webcam
     }
+    else if (type == 'date' && this.chartData[this.chartData.length - 1]){
+      lastValue = this.chartData[this.chartData.length - 1].startTimestamp*1000
+    } 
     return lastValue
   }
 

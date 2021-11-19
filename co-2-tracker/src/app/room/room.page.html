@@ -66,7 +66,7 @@
         >
           <ion-icon name="speedometer-outline"></ion-icon>
           <ion-label style="font-size: small">
-            {{getLastValue('CO2')}} ppm
+            {{getLastValue('CO2')}} ppm à {{getLastValue('date') | date: 'H:mm':'GMT+1'}}
           </ion-label>
         </ion-chip>
         <ion-chip
