@@ -43,11 +43,29 @@ export class GetApiService {
 
   getRoomDatasByPeriode(id, startDate, endDate) : Promise<any>{    
     return new Promise((resolve, reject) => {
-      this.http.get(this.ipAPI + "/room/getRoomDatasByPeriode/" + id + "/" + startDate + "/" + endDate + "/15")
+      this.http.get(this.ipAPI + "/room/getRoomDatasByPeriode/" + id + "/" + startDate + "/" + endDate + "/10")
       .subscribe(function (response:any) {                     
         resolve(response)
       });
   }); 
+  }
+
+  registerDeviceToRoom(id, uuid){
+    return new Promise((resolve, reject) => {
+      this.http.put(this.ipAPI + "/room/registerToRoom/" + id +  "/" + uuid, {
+      }).subscribe(function (response:any) {                     
+        resolve(response)
+      });
+    });
+  }
+
+  unregisterDeviceToRoom(id, uuid){
+    return new Promise((resolve, reject) => {
+      this.http.put(this.ipAPI + "/room/unregisterToRoom/" + id +  "/" + uuid, {
+      }).subscribe(function (response:any) {                     
+        resolve(response)
+      });
+    });
   }
 
 

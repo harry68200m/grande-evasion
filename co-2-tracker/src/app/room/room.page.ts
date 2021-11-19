@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Chart } from 'chart.js';
 import { GetApiService } from 'src/services/get-api.service';
 import { HistoryModalComponent } from '../history-modal/history-modal.component';
@@ -24,6 +24,9 @@ export class RoomPage {
   roomData: any;
   currentModal = null;
   chartData:any = [];
+  notifActivated = false;
+  isLoaded = false
+
 
 
   constructor(
@@ -31,7 +34,8 @@ export class RoomPage {
     private modalController: ModalController,
     private getAPI: GetApiService,
     private localNotifications: LocalNotifications,
-    private device: Device
+    private device: Device,
+    private alertController : AlertController
   ) {}
 
   async ngOnInit() {
@@ -42,7 +46,11 @@ export class RoomPage {
   async getRoomData() {
     console.log(this.roomID);
     await this.getAPI.room(this.roomID).then((response: any) => {
-      this.roomData = response.datas;})
+      this.roomData = response.datas
+      if (this.roomData.registeredUuid.includes(this.device.uuid)){
+        this.notifActivated = true
+      }
+    })
   
     let nowDate = Math.floor(Date.now() / 1000)
     await this.getAPI.getRoomDatasByPeriode(this.roomID, nowDate - 3600, nowDate ).then((response: any) => {
@@ -51,14 +59,50 @@ export class RoomPage {
         this.myCanvas.nativeElement
       )).getContext('2d');
       this.chart = new Chart(<HTMLCanvasElement>this.myCanvas.nativeElement, this.chartDatas());
+      this.isLoaded = true
     });
     console.log(this.chartData)
   }
 
+  registerDevice () {
+    this.getAPI.registerDeviceToRoom(this.roomID, this.device.uuid)
+    this.notifActivated = true
+  }
+
+  unregisterDevice () {
+    this.getAPI.unregisterDeviceToRoom(this.roomID, this.device.uuid)
+    this.notifActivated = false
+  }
+
+  async presentAlertConfirmUnregister() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirmation de désincription',
+      message: 'Etes-vous certains de vouloir vous désabonner des notifications de cette salle ?',
+      buttons: [
+        {
+          text: 'Annule',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: 'Confirmer',
+          handler: () => {
+            this.unregisterDevice()
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  
   enableNotif () {
+    this.registerDevice()
     this.localNotifications.schedule({
     title: 'Notifications activées pour ' + this.roomData.name,
-    text: 'Vous serez alerté si le seuil de CO2 dépasse la valeur recommandée , UUID : ' + this.device.uuid,
+    text: 'Vous serez alerté si le seuil de CO2 dépasse la valeur recommandée',
     foreground: true})
 
     setTimeout(() =>{
@@ -100,10 +144,12 @@ export class RoomPage {
     var webcamValues = [];
     this.chartData.forEach(valueBlock => {
       timestamps.push(valueBlock.startTimestamp)
-      co2Values.push(valueBlock.co2);
-      webcamValues.push(valueBlock.webcam);
+        co2Values.push(valueBlock.co2);
+        webcamValues.push(valueBlock.webcam);
     });
-    chartData.data.datasets.push({
+
+  if (!co2Values.every(v => v === null)) {
+      chartData.data.datasets.push({
       label: "CO2",
       data: co2Values,
       borderColor: this.getRandomColor(),
@@ -111,16 +157,21 @@ export class RoomPage {
       borderWidth: 2,
       tension: 0.1
     });
-    chartData.data.datasets.push({
+    }
+   
+    if (!webcamValues.every(v => v === null)) {
+      chartData.data.datasets.push({
       label: "Webcam",
       data: webcamValues,
       borderColor: this.getRandomColor(),
       yAxisID: "Webcam",
       borderWidth: 2,
       tension: 0.1
-    });    
+    }); 
+    }
+   
 
-    chartData.data.labels = timestamps.map(t =>  new Date(t*1000).toLocaleDateString('fr-FR') + ' ' + new Date(t*1000).toLocaleTimeString('fr-FR'));
+    chartData.data.labels = timestamps.map(t => new Date(t*1000).toLocaleTimeString('fr-FR'));
 
     return chartData;
   }

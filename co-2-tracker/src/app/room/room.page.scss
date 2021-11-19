@@ -76,11 +76,6 @@
       line-height: 32px;
       padding: 5px 0 15px 0;
     }
-    .date {
-      color: rgb(0, 0, 0);
-      font-size: 20px;
-      text-align: center;
-    }
     .overview {
       margin-top: 10px;
       margin: 6%;
@@ -94,4 +89,14 @@
   hr {
     background: black;
     width: 85%;
+}
+.loader {
+  margin-top: 75%;
+  margin-left: 50%;
+  transform: scale(3);
+}
+.date {
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  text-align: center;
 }
