@@ -53,7 +53,7 @@ export class RoomPage {
     })
   
     let nowDate = Math.floor(Date.now() / 1000)
-    await this.getAPI.getRoomDatasByPeriode(this.roomID, nowDate - 3600, nowDate ).then((response: any) => {
+    await this.getAPI.getRoomDatasByPeriode(this.roomID, nowDate - 7200, nowDate ).then((response: any) => {
       this.chartData = response.datas;
       this.context = (<HTMLCanvasElement>(
         this.myCanvas.nativeElement
