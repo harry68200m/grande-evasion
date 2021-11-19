@@ -127,12 +127,12 @@ export class RoomPage {
 
 
   getLastValue(type){
-    var lastValue = null;
-    if(type == 'CO2' && this.chartData.at(-1)){
-      lastValue = this.chartData.at(-1).co2
+    var lastValue; 
+    if(type == 'CO2' && this.chartData[this.chartData.length - 1]){
+      lastValue = this.chartData[this.chartData.length - 1].co2
     } 
-    else if (type == 'CO2' && this.chartData.at(-1)){
-      lastValue = this.chartData.at(-1).webcam
+    else if (type == 'CO2' && this.chartData[this.chartData.length - 1]){
+      lastValue = this.chartData[this.chartData.length - 1].webcam
     }
     return lastValue
   }
