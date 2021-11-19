@@ -32,24 +32,23 @@ export class GetApiService {
     });
   }
 
-  async room(id) {
+  room(id) : Promise<any>{    
     return new Promise((resolve, reject) => {
-      this.http
-        .get<any>(this.ipAPI + "/room/getRoomDetailsWithDatas/" + id, {
-          headers: {
-            "Content-Type": "application/json"
-          },
-        })
-        .subscribe(
-          res => {
-              resolve(res);
-          },
-          err => {
-            console.log("error");
-            reject(err);
-          }
-        );
-    });
+      this.http.get(this.ipAPI + "/room/getRoomDetailsWithDatas/" + id)
+      .subscribe(function (response:any) {                     
+        resolve(response)
+      });
+  }); 
   }
+
+  getRoomDatasByPeriode(id, startDate, endDate) : Promise<any>{    
+    return new Promise((resolve, reject) => {
+      this.http.get(this.ipAPI + "/room/getRoomDatasByPeriode/" + id + "/" + startDate + "/" + endDate + "/15")
+      .subscribe(function (response:any) {                     
+        resolve(response)
+      });
+  }); 
+  }
+
 
 }

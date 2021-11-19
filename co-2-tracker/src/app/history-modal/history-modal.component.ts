@@ -9,7 +9,7 @@ import { NavParams } from '@ionic/angular';
 export class HistoryModalComponent implements OnInit {
 
   @Input()
-  roomData: any;
+  chartData: any;
   CO2Measures= [];
   CamMeasures= [];
   Values= [];
@@ -17,27 +17,10 @@ export class HistoryModalComponent implements OnInit {
   constructor(public navParams : NavParams) { }
 
    ngOnInit() {
-    console.log(this.roomData)
-    this.regroupValues()
+    this.chartData.sort((a, b) => parseFloat(b.startTimestamp) - parseFloat(a.startTimestamp));    
+    console.log(this.chartData)
   }
 
-  regroupValues (){
-    if(this.roomData){
-      this.roomData.sensors.forEach(sensor => {
-        if (sensor.type == "CO2") {
-        console.log(sensor)
-        this.CO2Measures.push(sensor.values.slice(0,50))
-        }
-        else if (sensor.type == "Webcam") {
-          this.CamMeasures.push(sensor.values.slice(0,50))
-        }    
-      });
-    }   
-    this.CO2Measures.sort((a, b) => a.timestamp.localeCompare(b.timestamp));
-    this.CamMeasures.sort((a, b) => a.timestamp.localeCompare(b.timestamp));
-
-    console.log(this.CO2Measures)
-  }
 
   getValueColor(value) {
     if(value < 1000 ) {

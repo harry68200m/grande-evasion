@@ -29,7 +29,7 @@
     </div>
 
     <hr />
-    <ion-button style="margin: 6%" expand="block" color="warning"
+    <ion-button (click)="enableNotif()" style="margin: 6%" expand="block" color="warning"
       >Activer les alertes</ion-button
     >
 
@@ -48,7 +48,7 @@
           class="chipPeopleCount"
           *ngIf="getLastValue('Webcam')"
         >
-          <ion-icon name="speedometer-outline"></ion-icon>
+          <ion-icon name="person-outline"></ion-icon>
           <ion-label style="font-size: small">
             {{getLastValue('Webcam')}} personnes
           </ion-label>
