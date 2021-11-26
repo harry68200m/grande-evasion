@@ -12,7 +12,11 @@ import { HistoryModalComponent } from './history-modal/history-modal.component';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Badge } from '@ionic-native/badge/ngx';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
+
+const config: SocketIoConfig = { url: 'http://10.0.1.48:3301', options: {} };
 
 
 
@@ -20,8 +24,8 @@ import { Badge } from '@ionic-native/badge/ngx';
 @NgModule({
   declarations: [AppComponent, HistoryModalComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
-  providers: [GetApiService, HttpClient, LocalNotifications, Device, Badge, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,SocketIoModule.forRoot(config)],
+  providers: [GetApiService, HttpClient, LocalNotifications,BackgroundMode, Device, Badge, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

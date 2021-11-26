@@ -7,6 +7,8 @@ import { HistoryModalComponent } from '../history-modal/history-modal.component'
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications';
 import { Device } from '@ionic-native/device/ngx';
+import { Socket } from 'ngx-socket-io';
+
 
 @Component({
   selector: 'app-room',
@@ -35,7 +37,8 @@ export class RoomPage {
     private getAPI: GetApiService,
     private localNotifications: LocalNotifications,
     private device: Device,
-    private alertController : AlertController
+    private alertController : AlertController,
+    private socket: Socket
   ) {}
 
   async ngOnInit() {
@@ -104,15 +107,6 @@ export class RoomPage {
     title: 'Notifications activées pour ' + this.roomData.name,
     text: 'Vous serez alerté si le seuil de CO2 dépasse la valeur recommandée',
     foreground: true})
-
-    setTimeout(() =>{
-      this.localNotifications.schedule({
-        title: 'Merci d\'aérer la ' + this.roomData.name,
-        text: 'Le taux de CO2 est de ' + this.getLastValue('CO2') + ' ppm',
-        trigger: {in:10,unit:ELocalNotificationTriggerUnit.SECOND},
-        foreground: true}
-      );
-     }, 3000);
   }
 
   chartDatas(): any{
