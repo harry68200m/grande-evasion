@@ -84,7 +84,7 @@ export class RoomPage {
       message: 'Etes-vous certains de vouloir vous désabonner des notifications de cette salle ?',
       buttons: [
         {
-          text: 'Annule',
+          text: 'Annuler',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
