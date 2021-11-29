@@ -12,6 +12,7 @@ import { Device } from '@ionic-native/device/ngx';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
   constructor(private socket: Socket,
     private backgroundMode: BackgroundMode,
     private localNotification : LocalNotifications,

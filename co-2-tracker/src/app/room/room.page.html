@@ -73,12 +73,18 @@
           color="primary"
           style="font-size: small"
           class="chipPeopleCount"
-          *ngIf="getLastValue('Webcam')"
+          *ngIf="getLastValue('webcam')"
         >
           <ion-icon name="person-outline"></ion-icon>
           <ion-label style="font-size: small">
-            {{getLastValue('Webcam')}} personnes
+            {{getLastValue('webcam')}} personnes
           </ion-label>
+        </ion-chip>
+        <ion-chip  *ngIf="roomData && roomData.prediction >0" class="alertStatus" color="secondary">
+          <ion-label style="font-size: small"> Prochaine aération dans : {{roomData.prediction}} minutes </ion-label>
+        </ion-chip>
+        <ion-chip  *ngIf="roomData && roomData.prediction < 0" class="alertStatus" color="danger">
+          <ion-label style="font-size: small"> Seuil dépassé : Aérez la salle </ion-label>
         </ion-chip>
       </div>
     </div>

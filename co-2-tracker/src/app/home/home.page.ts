@@ -10,6 +10,7 @@ import { GetApiService } from 'src/services/get-api.service';
 export class HomePage {
 
   tableRooms: Array<any> = [];
+  isLoaded = false
 
   constructor(private router: Router, private getAPI: GetApiService) {}
 
@@ -20,6 +21,8 @@ export class HomePage {
   getRooms() {
     this.getAPI.rooms().then((response: any) => {
      this.tableRooms = response.datas.rooms;
+     this.isLoaded = true
+
    });
 
  }

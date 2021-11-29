@@ -6,8 +6,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
+<ion-content>
+  <ion-spinner class="loader" *ngIf="!isLoaded" name="crescent"></ion-spinner>
   <ion-item lines="full" *ngFor="let room of tableRooms; let i = index">
     <ion-card (click)="roomDetail(room._id)">
       <img style="width: 400px; height: 300px; object-fit: cover;" [src]="room.url_img" />

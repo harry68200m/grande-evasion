@@ -95,8 +95,15 @@
   margin-left: 50%;
   transform: scale(3);
 }
-.date {
+.date, .prediction {
   color: rgb(0, 0, 0);
   font-size: 20px;
   text-align: center;
+  margin-top: 2%;
+}
+.predictionAlert {
+  color: rgb(241, 37, 37);
+  font-size: 20px;
+  text-align: center;
+  margin-top: 2%;
 }
