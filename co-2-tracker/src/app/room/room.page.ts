@@ -1,14 +1,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController, ModalController } from '@ionic/angular';
-import { Chart } from 'chart.js';
+import { Chart, registerables} from 'chart.js';
 import { GetApiService } from 'src/services/get-api.service';
 import { HistoryModalComponent } from '../history-modal/history-modal.component';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications';
 import { Device } from '@ionic-native/device/ngx';
 import { Socket } from 'ngx-socket-io';
-
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-room',

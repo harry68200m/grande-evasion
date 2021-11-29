@@ -1,6 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -16,6 +19,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 
+
 const config: SocketIoConfig = { url: 'http://10.0.1.48:3301', options: {} };
 
 
@@ -24,8 +28,11 @@ const config: SocketIoConfig = { url: 'http://10.0.1.48:3301', options: {} };
 @NgModule({
   declarations: [AppComponent, HistoryModalComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,SocketIoModule.forRoot(config)],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,SocketIoModule.forRoot(config), CommonModule, FormsModule],
   providers: [GetApiService, HttpClient, LocalNotifications,BackgroundMode, Device, Badge, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class AppModule {}

@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RoomPage } from './room.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { RoomPageRoutingModule } from './room-routing.module';
 
@@ -13,7 +12,6 @@ import { RoomPageRoutingModule } from './room-routing.module';
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: RoomPage }]),
     RoomPageRoutingModule,
   ],

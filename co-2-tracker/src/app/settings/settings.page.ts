@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import json from '../../../package.json'
 
 @Component({
   selector: 'app-settings',
@@ -7,6 +8,11 @@ import { Component } from '@angular/core';
 })
 export class SettingsPage {
 
-  constructor() {}
+  public AppVersion
+
+  constructor() {
+    this.AppVersion = json.version
+  }
+
 
 }
