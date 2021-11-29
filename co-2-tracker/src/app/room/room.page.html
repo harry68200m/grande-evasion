@@ -83,7 +83,7 @@
         <ion-chip  *ngIf="roomData && roomData.prediction >0" class="alertStatus" color="secondary">
           <ion-label style="font-size: small"> Prochaine aération dans : {{roomData.prediction}} minutes </ion-label>
         </ion-chip>
-        <ion-chip  *ngIf="roomData && roomData.prediction < 0" class="alertStatus" color="danger">
+        <ion-chip  *ngIf="roomData && getLastValue('CO2') > 1500" class="alertStatus" color="default">
           <ion-label style="font-size: small"> Seuil dépassé : Aérez la salle </ion-label>
         </ion-chip>
       </div>
