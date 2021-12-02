@@ -48,7 +48,7 @@ module.exports.editPortillon = async (idPortillon, portillon) => {
     });
 };
 
-module.exports.inscriptionPortillon = async (idPortillon, UUID) => {
+module.exports.inscriptionPortillon = async (idPortillon, UUID, body) => {
     return new Promise(async (resolve, reject) => {
         bddService.executeSQLCommand('SELECT * FROM portillon WHERE id = ' + idPortillon).then((portillon) => {
             
@@ -57,10 +57,32 @@ module.exports.inscriptionPortillon = async (idPortillon, UUID) => {
                 uuids = portillon[0].uuid.split(';');
             };
             console.log("test ", uuids);
-            uuids.push(UUID);
-            bddService.executeSQLCommand('UPDATE portillon SET uuid = ' + uuids.join(";") + ' WHERE id = ' + idPortillon).then(() => {
+            if (body.register == true) {
+                if(uuids.indexOf(UUID) == -1){
+                    uuids.push(UUID); 
+                }
+            }else if(body.register == false) {
+                if(uuids.indexOf(UUID) != -1){
+                    uuids.splice(uuids.indexOf(UUID), 1);
+                }
+            }
+            
+            bddService.executeSQLCommand('UPDATE portillon SET uuid = \'' + uuids.join(";") + '\' WHERE id = ' + idPortillon).then(() => {
                 resolve("OK");
             });
         });         
     });
 };
+
+module.exports.ajoutEvenement = async (guid, status) => {
+    return new Promise(async (resolve, reject) => {
+        bddService.executeSQLCommand('SELECT * FROM portillon WHERE guid = ' + guid).then((portillon) => {
+            var date = new Date();
+            date.setTime(date.getTime() + (60*60*1000));
+            bddService.executeSQLCommand('INSERT INTO evenement (date, status, idPortillon) VALUES (\'' + date.toISOString().replace("T", " ").replace("Z", "") + '\', ' + status + ', ' + portillon[0].id + ')').then(() => {
+                resolve("OK");
+            });
+        });          
+    });
+};
+
