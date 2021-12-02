@@ -16,8 +16,8 @@ const routes: Routes = [
         loadChildren: () => import('../settings/settings.module').then(m => m.SettingsPageModule)
       },
       {
-        path: 'room',
-        loadChildren: () => import('../room/room.module').then(m => m.RoomPageModule)
+        path: 'portillon',
+        loadChildren: () => import('../portillon/portillon.module').then(m => m.PortillonPageModule)
       },
       {
         path: '',
