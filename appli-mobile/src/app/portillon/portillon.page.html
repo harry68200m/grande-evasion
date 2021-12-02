@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="roomData">{{roomData.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-spinner *ngIf="!isLoaded" class="loader" name="crescent"></ion-spinner>
+  <div *ngIf="isLoaded">
+    <div class="portillon-data">
+      <div class="name" *ngIf="roomData">Portillon 1</div>
+      <div class="titre">Statut :</div>
+      <div style="text-align: center">
+        <ion-chip color="success" style="font-size: small" class="statusChip">
+          <ion-label style="font-size: small"> Ouvert </ion-label>
+        </ion-chip>
+      </div>
+
+      <hr />
+
+      <ion-list>
+
+          <ion-item>
+            <ion-label>Notifications push</ion-label>
+            <ion-button *ngIf="!notifActivated" color="success" size="small"> Activer</ion-button>
+            <ion-button *ngIf="notifActivated" color="danger" size="small"> Désactiver</ion-button>
+          </ion-item>
+      
+          <ion-item>
+            <ion-label>Notifications mails</ion-label>
+            <ion-button *ngIf="notifActivated" color="success" size="small"> Activer</ion-button>
+            <ion-button *ngIf="!notifActivated" color="danger" size="small"> Désactiver</ion-button>
+          </ion-item>
+    
+      </ion-list>
+    </div>
+    <br />
+    <div class="titre">Derniers évenements : 
+      <br>
+      <ion-list>
+
+        <ion-item>
+          <ion-text>Ouverture de porte le 21/11/21 à 14:34</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text>Ouverture de porte le 21/11/21 à 14:34</ion-text>
+        </ion-item>
+        <ion-item>
+          <ion-text>Ouverture de porte le 21/11/21 à 14:34</ion-text>
+        </ion-item>
+    </ion-list>
+    </div>
+
+    <ion-button expand="full" color="primary" (click)="presentModal()"
+      >Historique complet des évenements</ion-button
+    >
+  </div>
+</ion-content>
