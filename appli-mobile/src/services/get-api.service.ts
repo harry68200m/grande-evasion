@@ -116,4 +116,14 @@ export class GetApiService {
   }
 
 
+  events(id) : Promise<any>{    
+    return new Promise((resolve, reject) => {
+      this.http.get(this.ipAPI + "/portillon/historiqueEvenements/" + id)
+      .subscribe(function (response:any) {                     
+        resolve(response)
+      });
+  }); 
+  }
+
+
 }

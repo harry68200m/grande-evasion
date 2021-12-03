@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
+import { GetApiService } from 'src/services/get-api.service';
 
 @Component({
   selector: 'app-history-modal',
@@ -9,27 +10,22 @@ import { NavParams } from '@ionic/angular';
 export class HistoryModalComponent implements OnInit {
 
   @Input()
-  chartData: any;
-  CO2Measures= [];
-  CamMeasures= [];
-  Values= [];
-
-  constructor(public navParams : NavParams) { }
+  portillon: any;
+  events: any;
+ 
+  constructor(public navParams : NavParams, private API : GetApiService) { }
 
    ngOnInit() {
-    this.chartData.sort((a, b) => parseFloat(b.startTimestamp) - parseFloat(a.startTimestamp));    
-    console.log(this.chartData)
+    this.getEvents()
   }
 
 
-  getValueColor(value) {
-    if(value < 1000 ) {
-      return 'success'
-    }
-    else if (value > 1000 && value < 1500){
-      return 'warning'
-    }
-    else return 'danger'
+  getEvents() {
+    this.API.events(this.portillon.id).then((response: any) => {
+     this.events = response.datas;
+     console.log(this.events)
+   });
+
   }
 
 }
