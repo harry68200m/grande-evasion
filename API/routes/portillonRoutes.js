@@ -125,5 +125,23 @@ router.route("/ajoutEvenement/:guid/:status").post(async (req, res) => {
     })
 });
 
+//historiqueEvents
+router.route("/historiqueEvenements/:id").get(async (req, res) => {    
+    await portillonService.historiqueEvents(req.params.id)
+    .then((data) => {
+        res.status(200).json({
+            success: true,
+            datas: data,
+        });
+    })
+    .catch((data) => {
+        res.status(500).json({
+            success: false,
+            datas: data,
+        });        
+    })
+});
+
+
 
 module.exports = router;

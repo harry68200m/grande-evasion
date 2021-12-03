@@ -82,7 +82,17 @@ module.exports.ajoutEvenement = async (guid, status) => {
             bddService.executeSQLCommand('INSERT INTO evenement (date, status, idPortillon) VALUES (\'' + date.toISOString().replace("T", " ").replace("Z", "") + '\', ' + status + ', ' + portillon[0].id + ')').then(() => {
                 resolve("OK");
             });
+            bddService.executeSQLCommand('UPDATE portillon SET status = \'' + status + '\' WHERE id = ' + portillon[0].id).then(() => {});
         });          
     });
 };
+
+module.exports.historiqueEvents = async (idPortillon) => {
+    return new Promise(async (resolve, reject) => {
+        bddService.executeSQLCommand('SELECT * FROM evenement WHERE idPortillon = ' + idPortillon + ' ORDER BY id DESC LIMIT 10').then((events) => {
+           resolve(events)
+        });          
+    });
+};
+
 
