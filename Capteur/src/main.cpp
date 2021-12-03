@@ -50,7 +50,7 @@ void loop()
 
   if (temp != value)
   {
-    temp = value;
+    temp = !value;
     pushToApi(!value);    
   }
   delay(500);
