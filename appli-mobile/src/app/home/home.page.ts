@@ -44,7 +44,7 @@ export class HomePage {
   async presentModalAdd() {
     const modal = await this.modalController.create({
       component: AddModalComponent,
-      componentProps: { homeref: this },
+      componentProps: { homeref: this},
       swipeToClose: true,
     });
     this.currentModal = modal;

@@ -100,7 +100,7 @@ export class PortillonPage {
   async presentModal() {
     const modal = await this.modalController.create({
       component: HistoryModalComponent,
-      componentProps: { homeref: this, chartData: this.chartData },
+      componentProps: { homeref: this, portillon: this.portillonData },
       swipeToClose: true,
     });
     this.currentModal = modal;
