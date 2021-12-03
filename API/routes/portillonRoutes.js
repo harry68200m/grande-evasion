@@ -92,7 +92,7 @@ router.route("/editPortillon/:id").put(async (req, res) => {
 });
 
 //Inscription au portillon
-router.route("/inscriptionPortillon/:id/:uuid").get(async (req, res) => {    
+router.route("/inscriptionPortillon/:id/:uuid").put(async (req, res) => {    
     await portillonService.inscriptionPortillon(req.params.id, req.params.uuid, req.body)
     .then((data) => {
         res.status(200).json({
