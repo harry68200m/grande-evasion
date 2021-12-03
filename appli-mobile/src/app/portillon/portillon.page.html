@@ -31,13 +31,7 @@
           <ion-item>
             <ion-label>Notifications push</ion-label>
             <ion-button *ngIf="!notifActivated" color="success" size="small" (click)="registerDevice()"> Activer</ion-button>
-            <ion-button *ngIf="notifActivated" color="danger" size="small" (click)="unregisterDevice()"> Désactiver</ion-button>
-          </ion-item>
-      
-          <ion-item>
-            <ion-label>Notifications mails</ion-label>
-            <ion-button *ngIf="notifActivated" color="success" size="small"> Activer</ion-button>
-            <ion-button *ngIf="!notifActivated" color="danger" size="small"> Désactiver</ion-button>
+            <ion-button *ngIf="notifActivated" color="danger" size="small" (click)="presentAlertConfirmUnregister()"> Désactiver</ion-button>
           </ion-item>
     
       </ion-list>

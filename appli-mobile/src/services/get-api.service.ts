@@ -85,7 +85,7 @@ export class GetApiService {
     return new Promise((resolve, reject) => {
       this.http.put(this.ipAPI + "/portillon/inscriptionPortillon/" + id +  "/" + uuid,
       {
-        register: true
+        "register": true
       },
       {
         headers: {
@@ -102,7 +102,7 @@ export class GetApiService {
     return new Promise((resolve, reject) => {
       this.http.put(this.ipAPI + "/portillon/inscriptionPortillon/" + id +  "/" + uuid,
       {
-        register: false
+        "register": false
       },
       {
         headers: {

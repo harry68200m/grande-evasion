@@ -44,9 +44,9 @@ export class PortillonPage {
     console.log(this.portillonID);
     await this.getAPI.portillon(this.portillonID).then((response: any) => {
       this.portillonData = response.datas[0]
-      // if (this.roomData.registeredUuid.includes(this.device.uuid)){
-      //   this.notifActivated = true
-      // }     
+      if (this.portillonData.uuid.includes(this.device.uuid)){
+        this.notifActivated = true
+      }     
       this.isLoaded = true
     })
     console.log(this.portillonData)
@@ -79,7 +79,7 @@ export class PortillonPage {
         }, {
           text: 'Confirmer',
           handler: () => {
-            //this.unregisterDevice()
+            this.unregisterDevice()
           }
         }
       ]
