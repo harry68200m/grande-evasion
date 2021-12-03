@@ -1,4 +1,5 @@
-var bddService = require("../services/bddService")
+var bddService = require("../services/bddService");
+var notificationService = require("../services/notificationService");
 
 module.exports.getAllPortillons = async () => {
     return new Promise(async (resolve, reject) => {
@@ -83,13 +84,21 @@ module.exports.ajoutEvenement = async (guid, status) => {
                 resolve("OK");
             });
             bddService.executeSQLCommand('UPDATE portillon SET status = \'' + status + '\' WHERE id = ' + portillon[0].id).then(() => {});
-        });          
+            notificationService.sendNotification(portillon[0].uuid, status, portillon[0].nom);
+        });    
+        
+        
     });
 };
 
 module.exports.historiqueEvents = async (idPortillon) => {
     return new Promise(async (resolve, reject) => {
         bddService.executeSQLCommand('SELECT * FROM evenement WHERE idPortillon = ' + idPortillon + ' ORDER BY id DESC LIMIT 10').then((events) => {
+            var eventsCorrect = [];
+            events.forEach(event => {
+                var d = new Date(event.date)
+                event.date = d.toLocaleString()
+            });
            resolve(events)
         });          
     });

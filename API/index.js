@@ -14,10 +14,10 @@ const  json  = require('./package.json');
 require("./services/bddService");
 
 //Notifications
-// const http = require('http');
-// const server = http.createServer(app);
-// var notificationService = require("./services/notificationService");
-// notificationService.main(server);
+const http = require('http');
+const server = http.createServer(app);
+var notificationService = require("./services/notificationService");
+notificationService.main(server);
 
 app.use(cors())
 
@@ -27,7 +27,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use("/portillon", require("./routes/portillonRoutes"));
-// app.use("/sensor", require("./routes/sensorRoutes"));
 
 app.get('/', (req, res) => {
     res.send("OK")
