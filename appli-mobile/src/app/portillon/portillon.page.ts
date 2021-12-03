@@ -52,15 +52,17 @@ export class PortillonPage {
     console.log(this.portillonData)
   }
 
-  // registerDevice () {
-  //   this.getAPI.registerDeviceToRoom(this.roomID, this.device.uuid)
-  //   this.notifActivated = true
-  // }
+  registerDevice () {
+    console.log(this.device.uuid)
+    this.getAPI.registerDeviceToRoom(this.portillonID, this.device.uuid)
+    this.notifActivated = true
+  }
 
-  // unregisterDevice () {
-  //   this.getAPI.unregisterDeviceToRoom(this.roomID, this.device.uuid)
-  //   this.notifActivated = false
-  // }
+  unregisterDevice () {
+    console.log(this.device.uuid)
+    this.getAPI.unregisterDeviceToRoom(this.portillonID, this.device.uuid)
+    this.notifActivated = false
+  }
 
   async presentAlertConfirmUnregister() {
     const alert = await this.alertController.create({

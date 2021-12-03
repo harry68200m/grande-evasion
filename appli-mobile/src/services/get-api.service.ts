@@ -72,7 +72,7 @@ export class GetApiService {
 
   deletePortillon(id) : Promise<any>{    
     return new Promise((resolve, reject) => {
-      this.http.delete(this.ipAPI + "/portillon/deletePortillon/" + id)
+      this.http.delete(this.ipAPI + "/portillon/deletePortillon/" + id,)
       .subscribe(function (response:any) {                     
         resolve(response)
       });
@@ -83,8 +83,16 @@ export class GetApiService {
 
   registerDeviceToRoom(id, uuid){
     return new Promise((resolve, reject) => {
-      this.http.put(this.ipAPI + "/room/registerToRoom/" + id +  "/" + uuid, {
-      }).subscribe(function (response:any) {                     
+      this.http.put(this.ipAPI + "/portillon/inscriptionPortillon/" + id +  "/" + uuid,
+      {
+        register: true
+      },
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      } 
+      ).subscribe(function (response:any) {                     
         resolve(response)
       });
     });
@@ -92,8 +100,16 @@ export class GetApiService {
 
   unregisterDeviceToRoom(id, uuid){
     return new Promise((resolve, reject) => {
-      this.http.put(this.ipAPI + "/room/unregisterToRoom/" + id +  "/" + uuid, {
-      }).subscribe(function (response:any) {                     
+      this.http.put(this.ipAPI + "/portillon/inscriptionPortillon/" + id +  "/" + uuid,
+      {
+        register: false
+      },
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      } 
+      ).subscribe(function (response:any) {                     
         resolve(response)
       });
     });
