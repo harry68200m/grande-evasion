@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-button (click)="goBack()">
+        <ion-icon color="white" name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title *ngIf="portillonData">{{portillonData.nom}}</ion-title>
   </ion-toolbar>

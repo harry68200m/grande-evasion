@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { GetApiService } from 'src/services/get-api.service';
 import { HistoryModalComponent } from '../history-modal/history-modal.component';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -30,10 +30,9 @@ export class PortillonPage {
     private activatedRoute: ActivatedRoute,
     private modalController: ModalController,
     private getAPI: GetApiService,
-    private localNotifications: LocalNotifications,
     private device: Device,
     private alertController : AlertController,
-    private socket: Socket
+    private navCtrl : NavController
   ) {}
 
   async ngOnInit() {
@@ -112,5 +111,9 @@ export class PortillonPage {
         this.currentModal = null;
       });
     }
+  }
+
+  goBack() {
+    this.navCtrl.back();
   }
 }
