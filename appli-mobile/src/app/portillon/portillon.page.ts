@@ -32,7 +32,8 @@ export class PortillonPage {
     private getAPI: GetApiService,
     private device: Device,
     private alertController : AlertController,
-    private navCtrl : NavController
+    private navCtrl : NavController,
+    private localNotifications : LocalNotifications
   ) {}
 
   async ngOnInit() {
@@ -88,13 +89,13 @@ export class PortillonPage {
     await alert.present();
   }
   
-  // enableNotif () {
-  //   this.registerDevice()
-  //   this.localNotifications.schedule({
-  //   title: 'Notifications activées pour ' + this.roomData.name,
-  //   text: 'Vous serez alerté si le seuil de CO2 dépasse la valeur recommandée',
-  //   foreground: true})
-  // }
+  enableNotif () {
+    this.registerDevice()
+    this.localNotifications.schedule({
+    title: 'Notifications activées pour ' + this.portillonData.nom,
+    text: 'Vous serez alerté en cas d\'ouverture du portillon',
+    foreground: true})
+  }
 
 
   async presentModal() {
