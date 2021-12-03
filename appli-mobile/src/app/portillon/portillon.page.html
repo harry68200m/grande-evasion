@@ -13,7 +13,7 @@
   <ion-spinner *ngIf="!isLoaded" class="loader" name="crescent"></ion-spinner>
   <div *ngIf="isLoaded">
     <div class="portillon-data">
-      <div class="name" *ngIf="portillonData">Portillon 1</div>
+      <div class="name" *ngIf="portillonData">{{portillonData.nom}}</div>
       <div class="titre">Statut :</div>
       <div style="text-align: center" *ngIf="portillonData">
         <ion-chip *ngIf="portillonData.status == 0" color="danger" style="font-size: small" class="statusChip">

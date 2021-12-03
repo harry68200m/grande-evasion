@@ -20,6 +20,7 @@ export class HomePage {
 
   ngOnInit() {
     this.getPortillons()
+    setInterval(() => this.getPortillons(), 3000);
   }
 
   getPortillons() {

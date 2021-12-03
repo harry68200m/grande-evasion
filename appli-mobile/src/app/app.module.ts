@@ -21,7 +21,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 
 
-const config: SocketIoConfig = { url: 'http://notiffilrouge404.thfr.studio', options: {} };
+const config: SocketIoConfig = { url: 'http://192.168.223.100:3010', options: {} };
 
 
 

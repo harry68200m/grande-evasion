@@ -35,9 +35,10 @@ module.exports.sendNotification = (devicesUuid, status, nom) => {
         if (devicesUuid != null) {
             var devicesUUID = devicesUuid.split(";");
             var devicesToNotif = devices.filter(function(d) { return devicesUUID.includes(d.uuid) == true});
-        
+            console.log(devicesUUID)
             devicesToNotif.forEach(device => {
-                io.to(device.id).emit(notification);
+                console.log(device)
+                io.to(device.id).emit("notif", notification);
             })
         }        
     }    

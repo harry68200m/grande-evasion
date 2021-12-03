@@ -24,7 +24,6 @@ export class AppComponent {
     this.backgroundMode.enable();
     this.socket.connect();
     setTimeout(() => {
-      console.log('UUID is  ', this.device.uuid)
       this.socket.emit('subscribeDevice', this.device.uuid);
 
       this.socket.fromEvent('notif').subscribe(message => {
@@ -37,7 +36,7 @@ export class AppComponent {
 
   sendNotif (message) {
     this.localNotification.schedule({
-    title:  message.titre + message.salle,
+    title:  message.titre + ' ' + message.portillon,
     text: message.texte,
     foreground: true})
   }
