@@ -17,8 +17,8 @@ export class PortillonPage {
   public date: string = new Date().toISOString();
 
   chart: any;
-  roomID: number;
-  roomData: any;
+  portillonID: number;
+  portillonData: any;
   currentModal = null;
   chartData:any = [];
   notifActivated = false;
@@ -37,35 +37,31 @@ export class PortillonPage {
   ) {}
 
   async ngOnInit() {
-    this.roomID = this.activatedRoute.snapshot.params['id'];
+    this.portillonID = this.activatedRoute.snapshot.params['id'];
     await this.getRoomData();
   }
 
   async getRoomData() {
-    console.log(this.roomID);
-    await this.getAPI.room(this.roomID).then((response: any) => {
-      this.roomData = response.datas
-      if (this.roomData.registeredUuid.includes(this.device.uuid)){
-        this.notifActivated = true
-      }
-    })
-  
-    let nowDate = Math.floor(Date.now() / 1000)
-    await this.getAPI.getRoomDatasByPeriode(this.roomID, nowDate - 7200, nowDate ).then((response: any) => {
+    console.log(this.portillonID);
+    await this.getAPI.portillon(this.portillonID).then((response: any) => {
+      this.portillonData = response.datas[0]
+      // if (this.roomData.registeredUuid.includes(this.device.uuid)){
+      //   this.notifActivated = true
+      // }     
       this.isLoaded = true
-    });
-    console.log(this.chartData)
+    })
+    console.log(this.portillonData)
   }
 
-  registerDevice () {
-    this.getAPI.registerDeviceToRoom(this.roomID, this.device.uuid)
-    this.notifActivated = true
-  }
+  // registerDevice () {
+  //   this.getAPI.registerDeviceToRoom(this.roomID, this.device.uuid)
+  //   this.notifActivated = true
+  // }
 
-  unregisterDevice () {
-    this.getAPI.unregisterDeviceToRoom(this.roomID, this.device.uuid)
-    this.notifActivated = false
-  }
+  // unregisterDevice () {
+  //   this.getAPI.unregisterDeviceToRoom(this.roomID, this.device.uuid)
+  //   this.notifActivated = false
+  // }
 
   async presentAlertConfirmUnregister() {
     const alert = await this.alertController.create({
@@ -82,7 +78,7 @@ export class PortillonPage {
         }, {
           text: 'Confirmer',
           handler: () => {
-            this.unregisterDevice()
+            //this.unregisterDevice()
           }
         }
       ]
@@ -91,17 +87,14 @@ export class PortillonPage {
     await alert.present();
   }
   
-  enableNotif () {
-    this.registerDevice()
-    this.localNotifications.schedule({
-    title: 'Notifications activées pour ' + this.roomData.name,
-    text: 'Vous serez alerté si le seuil de CO2 dépasse la valeur recommandée',
-    foreground: true})
-  }
+  // enableNotif () {
+  //   this.registerDevice()
+  //   this.localNotifications.schedule({
+  //   title: 'Notifications activées pour ' + this.roomData.name,
+  //   text: 'Vous serez alerté si le seuil de CO2 dépasse la valeur recommandée',
+  //   foreground: true})
+  // }
 
-  getRandomColor(){
-      return 'rgba(' + Math.floor(Math.random() * 255) + ','  + Math.floor(Math.random() * 255) + ','  + Math.floor(Math.random() * 255) + ',1)';
-  }  
 
   async presentModal() {
     const modal = await this.modalController.create({

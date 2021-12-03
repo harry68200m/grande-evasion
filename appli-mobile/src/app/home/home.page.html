@@ -19,14 +19,17 @@
       Liste des portillons
     </ion-list-header>
     <br>
-    <ion-item-sliding>
-      <ion-item (click)="portillonDetail('61a65262b2ae371332e7b4b0')">
-        <ion-label>Kiwi</ion-label>
-        <ion-text slot="end">Ouvert</ion-text>
-        <ion-icon slot="end" color="success" name="radio-button-on-outline"></ion-icon>
+
+    <ion-item-sliding *ngFor="let portillon of tablePortillons; let i = index">
+      <ion-item (click)="portillonDetail(portillon.id)">
+        <ion-label>{{portillon.nom}}</ion-label>
+          <ion-text slot="end" *ngIf="portillon.status == 0">Fermé</ion-text>
+          <ion-icon slot="end" *ngIf="portillon.status == 0" color="danger" name="radio-button-on-outline"></ion-icon>
+          <ion-text slot="end" *ngIf="portillon.status == 1">Ouvert</ion-text>
+          <ion-icon slot="end" *ngIf="portillon.status == 1" color="success" name="radio-button-on-outline"></ion-icon>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option >Supprimer</ion-item-option>
+        <ion-item-option (click)="presentAlertDelete(portillon.id)"> Supprimer</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   

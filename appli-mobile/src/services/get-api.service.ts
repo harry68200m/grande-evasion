@@ -12,10 +12,10 @@ export class GetApiService {
 
   constructor(private http: HttpClient) { }
 
-  async rooms() {
+  async portillons() {
     return new Promise((resolve, reject) => {
       this.http
-        .get<any>(this.ipAPI + "/room/getAllRooms", {
+        .get<any>(this.ipAPI + "/portillon/getPortillons", {
           headers: {
             "Content-Type": "application/json"
           }
@@ -32,23 +32,54 @@ export class GetApiService {
     });
   }
 
-  room(id) : Promise<any>{    
+  portillon(id) : Promise<any>{    
     return new Promise((resolve, reject) => {
-      this.http.get(this.ipAPI + "/room/getRoomDetailsWithDatas/" + id)
+      this.http.get(this.ipAPI + "/portillon/getPortillon/" + id)
       .subscribe(function (response:any) {                     
         resolve(response)
       });
   }); 
   }
 
-  getRoomDatasByPeriode(id, startDate, endDate) : Promise<any>{    
+  addPortillon(data) : Promise<any>{    
+    console.log(data)
     return new Promise((resolve, reject) => {
-      this.http.get(this.ipAPI + "/room/getRoomDatasByPeriode/" + id + "/" + startDate + "/" + endDate + "/10")
+      this.http
+        .post<any>(
+          this.ipAPI + '/portillon/addPortillon',
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          }
+        )
+        .subscribe(
+          res => {
+            if (res.success === true) {
+              resolve(res);
+            } else {
+              reject(res);
+            }
+          },
+          err => {
+            reject(err);
+          }
+        );
+    });
+
+  }
+
+  deletePortillon(id) : Promise<any>{    
+    return new Promise((resolve, reject) => {
+      this.http.delete(this.ipAPI + "/portillon/deletePortillon/" + id)
       .subscribe(function (response:any) {                     
         resolve(response)
       });
   }); 
   }
+
+  
 
   registerDeviceToRoom(id, uuid){
     return new Promise((resolve, reject) => {

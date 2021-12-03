@@ -2,7 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -29,7 +29,7 @@ const config: SocketIoConfig = { url: 'http://notiffilrouge404.thfr.studio', opt
 @NgModule({
   declarations: [AppComponent, HistoryModalComponent, AddModalComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,SocketIoModule.forRoot(config), CommonModule, FormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,SocketIoModule.forRoot(config), CommonModule, FormsModule, ReactiveFormsModule],
   providers: [GetApiService, HttpClient, LocalNotifications,BackgroundMode, Device, Badge, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
   schemas: [

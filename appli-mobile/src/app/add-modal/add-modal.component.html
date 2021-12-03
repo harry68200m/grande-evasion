@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar style="--background: var(--color-header)">
-    <ion-title> Ajouter </ion-title>
+    <ion-title style="text-align: center;"> Ajouter </ion-title>
     <ion-buttons slot="start">
       <ion-button
         class="goBack"
@@ -13,5 +13,17 @@
 </ion-header>
 
 <ion-content padding>
-  <h1>WORKS</h1>
+  <h2 style="text-align: center;">Ajouter un portillon</h2>
+  <br>
+  <form [formGroup]="addForm" (ngSubmit)="addPortillon()" class="mainView container">
+    <ion-item class="itemAdd" lines="full">
+      <ion-input placeholder='Nom' type="text" name="nom" formControlName="nom"></ion-input>
+    </ion-item>
+    <ion-item class="itemAdd" lines="full">
+      <ion-input placeholder='ID du capteur unique à 4 chiffres' max="9999" type="number" name="guid" formControlName="guid"></ion-input>
+    </ion-item>
+    <ion-button color="primary" style="border: 2px solid white; border-radius: 5px; margin: 7px;  text-transform: capitalize;" expand="full" type="submit" [disabled]="addForm.invalid" shape="round">
+     Ajouter</ion-button>
+  </form>
+
 </ion-content>

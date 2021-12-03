@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { GetApiService } from 'src/services/get-api.service';
 import { AddModalComponent } from '../add-modal/add-modal.component';
 
@@ -16,19 +16,26 @@ export class HomePage {
   currentModal = null;
 
 
-  constructor(private router: Router, private getAPI: GetApiService, private modalController : ModalController) {}
+  constructor(private router: Router, private API: GetApiService, private modalController : ModalController, private alertController : AlertController) {}
 
   ngOnInit() {
     this.getPortillons()
   }
 
   getPortillons() {
-    this.getAPI.rooms().then((response: any) => {
-     this.tablePortillons = response.datas.rooms;
+    this.API.portillons().then((response: any) => {
+     this.tablePortillons = response.datas;
      this.isLoaded = true
    });
 
- }
+  }
+
+ async deletePortillon(id) {
+  await this.API.deletePortillon(id).then((response: any) => {
+    console.log(response)
+  })
+  this.getPortillons()
+}
 
   portillonDetail(id){
     this.router.navigate(['portillon', id]);
@@ -50,6 +57,29 @@ export class HomePage {
         this.currentModal = null;
       });
     }
+  }
+
+  async presentAlertDelete(id) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirmation de suppression',
+      message: 'Etes-vous certains de vouloir supprimer ce portillon ?',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          handler: () => {
+          }
+        }, {
+          text: 'Supprimer',
+          handler: () => {
+            this.deletePortillon(id)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   

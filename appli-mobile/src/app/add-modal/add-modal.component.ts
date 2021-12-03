@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NavParams } from '@ionic/angular';
+import { GetApiService } from 'src/services/get-api.service';
 
 @Component({
   selector: 'app-add-modal',
@@ -9,27 +11,30 @@ import { NavParams } from '@ionic/angular';
 export class AddModalComponent implements OnInit {
 
   @Input()
-  chartData: any;
-  CO2Measures= [];
-  CamMeasures= [];
-  Values= [];
+  addForm: FormGroup;
 
-  constructor(public navParams : NavParams) { }
+
+  constructor(public navParams : NavParams, private formBuilder: FormBuilder, private Api : GetApiService) { }
 
    ngOnInit() {
-    this.chartData.sort((a, b) => parseFloat(b.startTimestamp) - parseFloat(a.startTimestamp));    
-    console.log(this.chartData)
+    this.initForm();
+  }
+
+  initForm() {
+    this.addForm = this.formBuilder.group({
+      nom: ['', [Validators.required]],  
+      guid: ['', [Validators.required]],  
+    });
+
   }
 
 
-  getValueColor(value) {
-    if(value < 1000 ) {
-      return 'success'
-    }
-    else if (value > 1000 && value < 1500){
-      return 'warning'
-    }
-    else return 'danger'
+  async addPortillon() {
+    const formValue = this.addForm.value;
+    await this.Api.addPortillon(formValue).then((response: any) => {
+      console.log(response)
+      this.navParams.data.homeref.getPortillons()
+      this.navParams.data.homeref.dismissModal()
+    })
   }
-
 }

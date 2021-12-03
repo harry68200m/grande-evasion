@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="roomData">{{roomData.name}}</ion-title>
+    <ion-title *ngIf="portillonData">{{portillonData.nom}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,11 +11,14 @@
   <ion-spinner *ngIf="!isLoaded" class="loader" name="crescent"></ion-spinner>
   <div *ngIf="isLoaded">
     <div class="portillon-data">
-      <div class="name" *ngIf="roomData">Portillon 1</div>
+      <div class="name" *ngIf="portillonData">Portillon 1</div>
       <div class="titre">Statut :</div>
-      <div style="text-align: center">
-        <ion-chip color="success" style="font-size: small" class="statusChip">
-          <ion-label style="font-size: small"> Ouvert </ion-label>
+      <div style="text-align: center" *ngIf="portillonData">
+        <ion-chip *ngIf="portillonData.status == 0" color="danger" style="font-size: small" class="statusChip">
+          <ion-label *ngIf="portillonData.status == 0" style="font-size: small"> Fermé </ion-label>
+        </ion-chip>
+        <ion-chip *ngIf="portillonData.status == 1" color="success" style="font-size: small" class="statusChip">
+          <ion-label *ngIf="portillonData.status == 1" style="font-size: small"> Ouvert </ion-label>
         </ion-chip>
       </div>
 
